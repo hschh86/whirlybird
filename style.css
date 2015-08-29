@@ -1,0 +1,81 @@
+.boardspace {
+    fill-opacity: 1;
+    stroke: white;
+    stroke-width: 2px;
+}
+.boardspace.dark {
+    fill:#555;
+}
+.boardspace.light {
+    fill:#ddd;
+}
+.boardspace.dark.open {
+	fill:#393;
+}
+.boardspace.light.open {
+	fill:#8f8;
+}
+.boardspace.active {
+	fill:purple;
+}
+.boardspace.open.vulnerable {
+	fill: red;
+}
+.boardspace.forbidden {
+	fill: orange;
+}
+.boardspace.dangerous {
+	fill: yellow;
+}
+.boardlabel {
+	font-family: Segoe UI, Roboto, Helvetica, sans-serif;
+	text-anchor: middle;
+	font-size: 0.6em;
+	text-transform: lowercase;
+	cursor: default;
+
+}
+
+.dot {
+	fill: white;
+}
+
+.chesspiece {
+	cursor: default;
+}
+
+
+.chesspiece text {
+	font-family: FreeSerif, DejaVu Sans, Segoe UI Symbol, serif;
+	text-anchor: middle;
+	font-size: 1.9em;
+}
+
+.chesspiece.black text {
+	fill: #ccc;
+}
+.chesspiece.white text {
+	fill: #222;
+}
+.chesspiece.black circle {
+	fill: #111;
+}
+.chesspiece.white circle {
+	fill: #eee;
+}
+
+.gone {
+	display: none;
+}
+
+.boardlabel, .chesspiece text {
+
+	/* do not recommend */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
