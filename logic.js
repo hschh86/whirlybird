@@ -1,26 +1,30 @@
 var Manager = (function () {
+	'use strict';
+
 	var svg_board, svg_pieces;
 	var Board, Prison;
 
-	function BoardSpace () {
+
+	function BoardSpace() {
 		this.setupSVG();
 		this.open = false;
 	}
 	BoardSpace.prototype.highlight = function () {
 		this.svg_object.classList.add.apply(this.svg_object.classList, arguments);
-	}
+	};
 	BoardSpace.prototype.lowlight = function () {
 		this.svg_object.classList.remove.apply(this.svg_object.classList, arguments);
-	}
+	};
 	BoardSpace.prototype.setOpen = function (passlist) {
+		var moveshadow, forbidden;
 		if (!this.open) {
 			gameState.openSpaces.push(this);
 			// check if this will put us in check.
 			//  simulate the move
-			var moveshadow = new ShadowBoard();
+			moveshadow = new ShadowBoard();
 			moveshadow.setMove(gameState.activeSpace, this);
 			// checkcheck
-			var forbidden = gameState.checkCheck(gameState.activePlayer, moveshadow);
+			forbidden = gameState.checkCheck(gameState.activePlayer, moveshadow);
 			if (forbidden) {
 				this.highlight("forbidden");
 
@@ -29,46 +33,47 @@ var Manager = (function () {
 				this.open = true;
 				this.highlight("open");
 
-				if (this.occupant && this.occupant.colour !== gameState.activePlayer){
+				if (this.occupant && this.occupant.colour !== gameState.activePlayer) {
 					this.highlight("vulnerable");
 				}
 			}
 		}
-	}
+	};
 	BoardSpace.prototype.setClosed = function () {
 		this.movelist = null;
 		this.open = false;
 		this.lowlight("open", "vulnerable", "forbidden");
-	}
+	};
 	BoardSpace.prototype.getNext = function (ds, dt) {
-		var cs = this.coords[0];
-		var ct = this.coords[1];
-		var nds, ndt, jump;
-		var bsp;
-		if (ct===0 && dt===-1) {
-            if (cs===CT.BSIZE-1 && ds===1 ||
-                 cs===CT.BSIZE && ds===-1) {
+
+		var cs, ct, nds, ndt, jump, bsp;
+		cs = this.coords[0];
+		ct = this.coords[1];
+
+		if (ct === 0 && dt === -1) {
+            if ((cs === CT.BSIZE-1 && ds === 1) ||
+                (cs === CT.BSIZE && ds === -1)) {
             	nds = ds;
                 jump = 0;
             } else {
                 nds = jump = -ds;
             }
             ndt = 1;
-            bsp = getspace(conjugate(cs)+jump, 0);
+            bsp = getspace(conjugate(cs) + jump, 0);
         } else {
-            bsp = getspace(cs+ds, ct+dt);
+            bsp = getspace(cs + ds, ct + dt);
             nds = ds;
             ndt = dt;
         }
-        return {bspace: bsp, ds: nds, dt: ndt}
-	}
+        return {bspace: bsp, ds: nds, dt: ndt};
+	};
 	BoardSpace.prototype.toString = function () {
 		return this.coords.toString();
-	}
+	};
 	BoardSpace.prototype.passantOpen = function (bsp) {
 		//this.setOpen([bsp]);
 
-	}
+	};
 
 
 	var getspace = function (s, t) {
@@ -1125,7 +1130,7 @@ var Manager = (function () {
 
 	/****** 	INITIALISER		*********/
 
-	initialise = function () {
+	var initialise = function () {
 		svg_board = document.getElementById("board");
 		svg_pieces = document.getElementById("pieces");
 		PieceMaker.initialise();

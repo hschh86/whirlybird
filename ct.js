@@ -1,6 +1,6 @@
 var CT = {
 	// Namespaces
-	SN: "http://www.w3.org/2000/svg",  	// SVG
+	SN: "http://www.w3.org/2000/svg",	// SVG
 	XN: "http://www.w3.org/1999/xlink",	// XLink
 
 	// Settings
@@ -19,6 +19,6 @@ var CT = {
 	ANIMATIONS: true,
 
 	// Animations
-	ADUR: "0.5s",		// Animation Duration
-}
+	ADUR: "0.5s"		// Animation Duration
+};
 
